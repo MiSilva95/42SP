@@ -1,8 +1,3 @@
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-
 // Função que retorna o comprimento de uma string
 int	ft_strlen(const char *s)
 {
