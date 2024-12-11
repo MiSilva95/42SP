@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:19:15 by mida-sil          #+#    #+#             */
-/*   Updated: 2024/12/04 15:06:40 by mida-sil         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:07:56 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 # endif
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <fcntl.h>
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);

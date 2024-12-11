@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:18:32 by mida-sil          #+#    #+#             */
-/*   Updated: 2024/12/04 15:59:57 by mida-sil         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:08:00 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ char	*get_next_line(int fd)
 	return (output_text);
 }
 
+// #include <fcntl.h>
+// #include <stdio.h>
 // int	main(int argc, char **argv)
 // {
 // 	int		fd;
