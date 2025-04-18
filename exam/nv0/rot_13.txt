@@ -1,0 +1,28 @@
+Nome da tarefa: rot_13
+Arquivos esperados: rot_13.c
+Funções permitidas: write
+--------------------------------------------------------------------------------
+
+Escreva um programa que receba uma string e a exiba, substituindo cada uma de suas
+letras pela letra 13 casas à frente em ordem alfabética.
+
+'z' se torna 'm' e 'Z' se torna 'M'. A diferenciação entre maiúsculas e minúsculas permanece inalterada.
+
+A saída será seguida por uma quebra de linha.
+
+Se o número de argumentos não for 1, o programa exibirá uma quebra de linha.
+
+Exemplo:
+
+$>./rot_13 "abc"
+nop
+$>./rot_13 "My horse is Amazing." | cat -e
+Zl ubefr vf Nznmvat.$
+$>./rot_13 "AkjhZ zLKIJz , 23y " | cat -e
+NxwuM mYXVWm , 23l $
+$>./rot_13 | cat -e
+$
+$>
+$>./rot_13 "" | cat -e
+$
+$>

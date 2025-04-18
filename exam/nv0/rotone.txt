@@ -1,0 +1,28 @@
+Nome da tarefa: rotone
+Arquivos esperados: rotone.c
+Funções permitidas: write
+--------------------------------------------------------------------------------
+
+Escreva um programa que receba uma string e a exiba, substituindo cada uma de suas
+letras pela próxima em ordem alfabética.
+
+'z' se torna 'a' e 'Z' se torna 'A'. A diferenciação entre maiúsculas e minúsculas permanece inalterada.
+
+A saída será seguida por um \n.
+
+Se o número de argumentos não for 1, o programa exibirá \n.
+
+Exemplo:
+
+$>./rotone "abc"
+bcd
+$>./rotone "Les stagiaires du staff ne sentent pas toujours tres bon." | cat -e
+Mft tubhjbjsft ev tubgg of tfoufou qbt upvkpvst usft cpo.$
+$>./rotone "AkjhZ zLKIJz , 23y " | cat -e
+BlkiA aMLJKa , 23z $
+$>./rotone | cat -e
+$
+$>
+$>./rotone "" | cat -e
+$
+$>
