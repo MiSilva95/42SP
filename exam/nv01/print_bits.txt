@@ -1,0 +1,13 @@
+Nome da tarefa: print_bits
+Arquivos esperados: print_bits.c
+Funções permitidas: write
+--------------------------------------------------------------------------------
+
+Escreva uma função que receba um byte e o imprima em binário SEM QUEBRA DE LINHA
+NO FINAL.
+
+Sua função deve ser declarada da seguinte forma:
+
+void print_bits(unsigned char octet);
+
+Por exemplo, se você passar 2 para print_bits, ele imprimirá "00000010"
