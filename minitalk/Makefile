@@ -1,7 +1,7 @@
 NAME = minitalk
 
-SRC_CLIENT = src/client.c
-SRC_SERVER = src/server.c
+SRC_CLIENT = client.c
+SRC_SERVER = server.c
 
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 OBJ_SERVER = $(SRC_SERVER:.c=.o)

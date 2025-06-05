@@ -9,9 +9,9 @@ int main(int ac, char **av)
         while(av[1][i])
         {
             c = av[1][i];
-            if(c >= 'a' && c <= 'm' || c >= 'A' && c <= 'M')
+            if((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M'))
                 c += 13;
-            else if(c >= 'n' && c <= 'z' || c >= 'N' && c <= 'Z')
+            else if((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z'))
                 c -= 13;
             i++;
             write(1, &c, 1);
