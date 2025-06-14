@@ -1,0 +1,19 @@
+Nome do exercício : paramsum  
+Arquivos esperados: paramsum.c  
+Funções permitidas: write  
+--------------------------------------------------------------------------------
+
+Escreva um programa que exibe o número de argumentos passados para ele, seguido
+de uma quebra de linha.
+
+Se nenhum argumento for passado, apenas exiba um 0 seguido de uma quebra de linha.
+
+Exemplo:
+
+$>./paramsum 1 2 3 5 7 24
+6
+$>./paramsum 6 12 24 | cat -e
+3$
+$>./paramsum | cat -e
+0$
+$>
