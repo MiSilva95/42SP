@@ -6,38 +6,21 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:17:34 by mida-sil          #+#    #+#             */
-/*   Updated: 2025/06/28 13:28:04 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:06:34 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "minilibx-linux/mlx.h"
-#include <X11/X.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-
-/*
- * ESC or i press the x🔴 in the window
- * there won't be leaks!
- * int (*f)(void *param)
-*/
 int	close_handler(t_fractal *fractal)
 {
-	mlx_destroy_image(fractal->mlx_connection,
-					fractal->img.img_ptr);
-	mlx_destroy_window(fractal->mlx_connection,
-						fractal->mlx_window);
+	mlx_destroy_image(fractal->mlx_connection, fractal->img.img_ptr);
+	mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
 	mlx_destroy_display(fractal->mlx_connection);
 	free(fractal->mlx_connection);
 	exit(EXIT_SUCCESS);
 }
 
-
-/*
- * Keypress prototype
- * int (*f)(int keycode, void *param)
-*/
 int	key_handler(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_Escape)
@@ -54,40 +37,20 @@ int	key_handler(int keysym, t_fractal *fractal)
 		fractal->iterations_defintion += 10;
 	else if (keysym == XK_minus)	
 		fractal->iterations_defintion -= 10;
-
-	// refresh the image
 	fractal_render(fractal);
-	return 0;
+	return (0);
 }
 
-
-
-/*
- * int (*f)(int button, int x, int y, void *param)
-*/
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-	//Zoom in
 	if (button == Button5)
-	{
 		fractal->zoom *= 0.95;
-	}
-	//Zoom out
 	else if (button == Button4)
-	{
 		fractal->zoom *= 1.05;
-	}
-	// refresh
 	fractal_render(fractal);
-	return 0;
+	return (0);
 }
 
-
-/*
- * TRACK the mouse
- * to change julia dynamically
- * int (*f)(int x, int y, void *param)
-*/
 int	julia_track(int x, int y, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
@@ -96,6 +59,5 @@ int	julia_track(int x, int y, t_fractal *fractal)
 		fractal->julia_y = (map(y, +2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
 		fractal_render(fractal);
 	}
-	return 0;
+	return (0);
 }
-
