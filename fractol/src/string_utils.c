@@ -18,9 +18,9 @@ int	ft_strncmp(char *s1, char *s2, int n)
 		return (0);
 	while (*s1 == *s2 && n > 0 && *s1 != '\0')
 	{
-		++s1;
-		++s2;
-		--n;
+		s1++;
+		s2++;
+		n--;
 	}
 	return (*s1 - *s2);
 }
@@ -48,14 +48,14 @@ double	atodbl(char *s)
 	sign = 1;
 	pow = 1;
 	while ((*s >= 9 && *s <= 13) || *s == 32)
-		++s;
+		s++;
 	while (*s == '+' || *s == '-')
 		if (*s++ == '-')
 			sign = -sign;
 	while (*s != '.' && *s)
 		integer_part = (integer_part * 10) + (*s++ - 48);
 	if (*s == '.')
-		++s;
+		s++;
 	while (*s)
 	{
 		pow /= 10;
