@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:17:34 by mida-sil          #+#    #+#             */
-/*   Updated: 2025/06/28 14:17:28 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:59:57 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_strncmp(char *s1, char *s2, int n)
 void	putstr_fd(char *s, int fd)
 {
 	if (s == NULL || fd < 0)
-		return;
+		return ;
 	if (*s != '\0')
 	{
 		write(fd, s, 1);
