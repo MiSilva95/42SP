@@ -15,14 +15,16 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR)
-
 MLX_FLAGS = -lmlx -lXext -lX11 -lm
 
+all: $(NAME)
+
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
 	@echo "[✓] $(NAME) compiled!"
 
-all: $(NAME)
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)

@@ -22,7 +22,8 @@
 # include <mlx.h>
 
 # define ERROR_MESSAGE "Please enter \n\t\"./fractol mandelbrot\" or \
-\n\t\"./fractol julia <value_1> <value_2>\" or \n\t\"./fractol burning\"\n"
+\n\t\"./fractol julia <value_1> <value_2>\n"
+
 # define WIDTH 1000
 # define HEIGHT 1000
 # define BLACK 0x000000

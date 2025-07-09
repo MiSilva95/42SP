@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:17:34 by mida-sil          #+#    #+#             */
-/*   Updated: 2025/07/05 14:42:57 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/07/09 10:16:58 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ static int	iterate_point(t_complex z, t_complex c, t_fractal *fractal)
 	i = 0;
 	while (i < fractal->max_iter)
 	{
-		if (!ft_strncmp(fractal->name, "burning", 7))
-		{
-			z.x = fabs(z.x);
-			z.y = fabs(z.y);
-		}
 		z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 			return (i);
@@ -69,17 +64,17 @@ static void	process_pixel(int x, int y, t_fractal *fractal)
 	iter = iterate_point(z, c, fractal);
 	if (iter != -1)
 	{
-		color = map(iter, (t_range){0, fractal->max_iter}, \
-		(t_range){BLACK, WHITE});
+		color = (iter * 1234567) & 0xFFFFFF;
 		fractal_put_pixel(x, y, &fractal->img, color);
 	}
 	else
 		fractal_put_pixel(x, y, &fractal->img, WHITE);
 }
 
-void fractal_render(t_fractal *fractal)
+void	fractal_render(t_fractal *fractal)
 {
-	int y, x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < HEIGHT)
