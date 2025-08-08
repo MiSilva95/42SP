@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:17:34 by mida-sil          #+#    #+#             */
-/*   Updated: 2025/07/05 13:38:01 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/07/09 11:14:07 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ int	key_handler(int keysym, t_fractal *fractal)
 {
 	if (keysym == XK_Escape)
 		close_handler(fractal);
-	else if (keysym == XK_plus)
-		fractal->max_iter += 10;
-	else if (keysym == XK_minus)
-		fractal->max_iter -= 10;
-	fractal_render(fractal);
 	return (0);
 }
 
