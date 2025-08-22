@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BTIN_system_variables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vimafra- <vimafra-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 14:32:34 by vimafra-          #+#    #+#             */
-/*   Updated: 2025/08/08 11:53:46 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/08/02 17:03:17 by vimafra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_var_node *new_system_var(char *input)
 	if (!new_node)
 		return (NULL);
     new_node->name = ft_strdup(input);
-    new_node->content = ft_strdup(getenv(input));
+    //new_node->content = ft_strdup(getenv(input)); // por alguma razão essa linha não funciona no codespace
+    //comentar as duas linhas abaixo na máquina da 42, e usar a de cima
+    char *env_value = getenv(input);
+    new_node->content = env_value ? ft_strdup(env_value) : ft_strdup("");
     new_node->set_status = 1;
     new_node->next = NULL;
     return (new_node);

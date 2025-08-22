@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BTIN_pwd.c                                         :+:      :+:    :+:   */
+/*   SIGNAL_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vimafra- <vimafra-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 19:43:33 by vimafra-          #+#    #+#             */
-/*   Updated: 2025/08/09 19:18:08 by vimafra-         ###   ########.fr       */
+/*   Created: 2025/08/19 14:00:06 by vimafra-          #+#    #+#             */
+/*   Updated: 2025/08/19 16:10:55 by vimafra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define _POSIX_C_SOURCE 200809L
 #include "includes/minishell.h"
 
-int ft_pwd(void)
+void sigint_handler(int signal)
 {
-    char *output;
-    
-    output = getcwd(NULL, 0);
-    if (!output)
-        return (1);
-    printf("%s\n", output);
-    string_slayer(1, &output);
-    return (0);
+    (void)signal;
+    rl_replace_line("", 0);
+    write(STDOUT_FILENO, "\n", 1);
+    rl_on_new_line();
+    rl_redisplay();
+}
+
+void signal_handler(void)
+{
+    struct sigaction sa;
+
+    sa.sa_handler = sigint_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	sigaction(SIGINT, &sa, NULL);
 }

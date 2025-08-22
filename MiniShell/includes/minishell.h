@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:23:14 by mida-sil          #+#    #+#             */
-/*   Updated: 2025/08/08 11:51:23 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:47:35 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <stdarg.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 typedef struct s_node
 {
@@ -96,7 +97,29 @@ int ft_echo(char **input, t_var_list **structure);
 //BTIN_exit
 int ft_exit(char **input, t_var_list **structure, long long n);
 
+//REDIR_functions
+int is_redir(char **input);
+char **get_info(char ***input, int index);
+int redirect_output(char **redir_info);
+int redirect_input(char **redir_info);
+int *ft_redir(char ***input);
+
+//REDIR_heredoc
+char *join_lines(char *doc, char *new);
+int temp_and_switch(char *input);
+int redirect_heredoc(char **info);
+int heredoc_input(char ***input);
+
+//REDIR utils
+char *input_or_output(char **info, int **result);
+void reset_std(int *info);
+
+//SIGNAL functions
+void sigint_handler(int signal);
+void signal_handler(void);
+
 //minishell_utils
+void	free_array(char **arr);
 void string_slayer(int num, ...);
 int count_char(char *path, char c);
 char    *split_and_substr(char *str, char c, int i);
@@ -109,5 +132,9 @@ int				find_pipe(char **tokens);
 char			**extract_left(char **tokens, int pipe_index);
 char			**extract_right(char **tokens, int pipe_index);
 t_parsed_pipe	parse_pipe(char **tokens);
+
+//pipe_exec
+void	exec_with_pipe(t_parsed_pipe parsed, char **envp, char *env_path);
+void	handle_command(char **tokens, t_var_list **variables_list, char **envp, char *env_path);
 
 #endif

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vimafra- <vimafra-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 18:21:40 by vimafra-          #+#    #+#             */
-/*   Updated: 2025/08/08 11:56:01 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/08/19 11:18:51 by vimafra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+void	free_array(char **arr)
+{
+	int i = 0;
+	if (!arr)
+		return;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
 
 void string_slayer(int num, ...)
 {

@@ -4,7 +4,7 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 INC_DIR     = INCLUDES
 INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR)
 
-SRC         = main.c tokenizer.c external_comms.c BTIN_pwd.c BTIN_cd.c BTIN_env.c BTIN_export.c BTIN_system_variables.c BTIN_unset.c BTIN_echo.c BTIN_exit.c minishell_utils.c executor.c tokenizer_op.c pipe_parser.c
+SRC         = main.c tokenizer.c external_comms.c BTIN_pwd.c BTIN_cd.c BTIN_env.c BTIN_export.c BTIN_system_variables.c BTIN_unset.c BTIN_echo.c BTIN_exit.c minishell_utils.c executor.c tokenizer_op.c REDIR_functions.c REDIR_heredoc.c REDIR_utils.c SIGNAL_functions.c pipe_exec.c pipe_parser.c
 OBJ_DIR     = obj
 OBJ         = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
