@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimafra- <vimafra-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 18:21:40 by vimafra-          #+#    #+#             */
-/*   Updated: 2025/08/19 11:18:51 by vimafra-         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:15:43 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,37 @@ void free_linked_list(t_var_list **structure)
 	}
 	free(head);
 	*structure = NULL;
+}
+
+t_var_list	*init_variables(void)
+{
+	t_var_list	*variables_list;
+
+	variables_list = malloc(sizeof(t_var_list));
+	if (!variables_list)
+	{
+		printf("Erro: malloc de variables_list falhou\n");
+		return (NULL);
+	}
+	variables_list->system_var_list = NULL;
+	variables_list->usr_var_list = NULL;
+	if (set_system_var(&variables_list->system_var_list) == -1)
+	{
+		printf("Erro: set_system_var falhou\n");
+		free(variables_list);
+		return (NULL);
+	}
+	return (variables_list);
+}
+
+char	*prompt_line(void)
+{
+	char	*line;
+
+	line = readline("minishell> ");
+	if (!line)
+		return (NULL);
+	if (*line)
+		add_history(line);
+	return (line);
 }

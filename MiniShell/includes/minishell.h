@@ -6,7 +6,7 @@
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:23:14 by mida-sil          #+#    #+#             */
-/*   Updated: 2025/08/22 14:47:35 by mida-sil         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:36:00 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int redirect_heredoc(char **info);
 int heredoc_input(char ***input);
 
 //REDIR utils
-char *input_or_output(char **info, int **result);
+void input_or_output(char **info, int **result);
 void reset_std(int *info);
 
 //SIGNAL functions
@@ -126,6 +126,11 @@ char    *split_and_substr(char *str, char c, int i);
 char    *append_path(char *path, char *str, int i, int j);
 char *dup_from_index(char **str, int index);
 void free_linked_list(t_var_list **structure);
+t_var_list	*init_variables(void);
+char	*prompt_line(void);
+
+//main
+int is_built_in(char **input, t_var_list **structure);
 
 //pipe_parser
 int				find_pipe(char **tokens);
@@ -134,7 +139,6 @@ char			**extract_right(char **tokens, int pipe_index);
 t_parsed_pipe	parse_pipe(char **tokens);
 
 //pipe_exec
-void	exec_with_pipe(t_parsed_pipe parsed, char **envp, char *env_path);
 void	handle_command(char **tokens, t_var_list **variables_list, char **envp, char *env_path);
 
 #endif

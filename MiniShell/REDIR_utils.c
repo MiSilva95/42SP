@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   REDIR_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimafra- <vimafra-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:47:18 by vimafra-          #+#    #+#             */
-/*   Updated: 2025/08/19 16:20:15 by vimafra-         ###   ########.fr       */
+/*   Updated: 2025/08/22 18:18:20 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,20 @@ void input_or_output(char **info, int **result)
         (*result)[1] = redirect_heredoc(info);
     }
     if ((*result[1] == -1))
-        (*result)[0] == -1;        
+        (*result)[0] = -1;        
 }
 
-void reset_std(int **info)
+void reset_std(int *info)
 {
     if (info[0])
-    if (info[0] == 1)
-        dup2(info[1], STDOUT_FILENO);
-    else if (info[0] == 2 || info[0] == 3)
-        dup2(info[1], STDIN_FILENO);
-    close(info[1]);
-    if (info[0] == 3)
-        unlink("/tmp/minishell_heredoc.txt");
-    free(info)
+    {
+        if (info[0] == 1)
+            dup2(info[1], STDOUT_FILENO);
+        else if (info[0] == 2 || info[0] == 3)
+            dup2(info[1], STDIN_FILENO);
+        close(info[1]);
+        if (info[0] == 3)
+            unlink("/tmp/minishell_heredoc.txt");
+    }
+    free(info);
 }

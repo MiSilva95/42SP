@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vimafra- <vimafra-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:52:17 by vimafra-          #+#    #+#             */
-/*   Updated: 2025/08/19 16:12:15 by vimafra-         ###   ########.fr       */
+/*   Updated: 2025/08/23 10:01:48 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/minishell.h"
 
 int is_built_in(char **input, t_var_list **structure)
 {
@@ -32,79 +32,71 @@ int is_built_in(char **input, t_var_list **structure)
         return (2);
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	t_var_list	*variables_list;
-	char		*line;
-	char		**tokens;
-	int command_type;
-	int *redir_status;
+    t_var_list  *variables_list;
+    char        *line;
+    char        **tokens;
+    int         *redir_status;
 
-	(void)argc;
-	(void)argv;
-	(void)envp;
+    (void)argc;
+    (void)argv;
+    (void)envp;
+    variables_list = malloc(sizeof(t_var_list));
+    if (!variables_list)
+    {
+        printf("Erro: malloc de variables_list falhou\n");
+        return (1);
+    }
+    variables_list->system_var_list = NULL;
+    variables_list->usr_var_list = NULL;
+    if (set_system_var(&variables_list->system_var_list) == -1)
+    {
+        free(variables_list);
+        printf("Erro: set_system_var falhou\n");
+        return (1);
+    }
+    // seta tratamento de SIGINT (CTRL + C)
+    signal_handler();
+    while (1)
+    {
+        line = readline("minishell> ");
+        if (!line) // CTRL+D
+        {
+            printf("exit\n");
+            free_linked_list(&variables_list);
+            exit(0);
+        }
+        if (*line)
+            add_history(line);
 
-	command_type = 0;
-	variables_list = malloc(sizeof(t_var_list));
-	if (!variables_list)
-	{
-		printf("Erro: malloc de variables_list falhou\n");
-		return (1);
-	}
-	variables_list->system_var_list = NULL;
-	variables_list->usr_var_list = NULL;
-	if (set_system_var(&variables_list->system_var_list) == -1)
-	{
-		free(variables_list);
-		printf("Erro: set_system_var falhou\n");
-		return (1);
-	}
+        tokens = tokenize_input(line);
+        free(line);
 
-	// seta funções para lidar com o SIGINT (CTRL + C)
-	signal_handler();
-	while (1)
-	{
-		line = readline("minishell> ");
-		
-		//digitando CTRL + D, line vem com valor NULL
-		if (!line)
-		{
-			printf("exit\n");
-			free_linked_list(&variables_list);
-			exit(0);
-		}
-		if (*line)
-			add_history(line);	 
+        if (!tokens)
+        {
+            printf("Erro: tokenize_input retornou NULL\n");
+            continue;
+        }
+        if (!tokens[0])
+        {
+            // printf("Aviso: tokens[0] é NULL\n");
+            free(tokens);
+            continue;
+        }
 
-		tokens = tokenize_input(line);
-		free(line);
+        // tratamento de redirecionamentos
+        redir_status = ft_redir(&tokens);
 
-		if (!tokens)
-		{
-			printf("Erro: tokenize_input retornou NULL\n");
-			continue;
-		}
-		if (!tokens[0])
-		{
-			printf("Aviso: tokens[0] é NULL\n");
-			free(tokens);
-			continue;
-		}
-		redir_status = ft_redir(&tokens);
-		// vê se é built in ou externo
-		// 0 ou 1 é built in, 2 é externo
-		command_type = is_built_in(tokens, &variables_list);
-		if (command_type == 0 || command_type == 1)
-			variables_list->exit_code = command_type;
-		else
-			variables_list->exit_code = exec_external(tokens, getenv("PATH"));
-		free_array(tokens);
-		// se houve redirecionamento, reseta o STDOUT_FILENO
-		if (redir_status)
-			reset_std(redir_status);
-	}
-	free_linked_list(&variables_list);
-	return (0);
+        // chama handle_command
+        handle_command(tokens, &variables_list, NULL, getenv("PATH"));
+
+        // reseta STDOUT se houve redirecionamento
+        if (redir_status)
+            reset_std(redir_status);
+    }
+    free_linked_list(&variables_list);
+    return (0);
 }
 
 // <<<<<<< fork_execve
